@@ -28,7 +28,7 @@ while (finished === 1) {
   // User input 
   const userOperation = prompt("Welcome to your 2025-26 hockey season.\nPlease select what you would like to do (select by typing the letter in front of the action)\nA. Input details of the season so far\nB. Add a new game to your season\nC. Display season statistics\nD. End season\n") || "";
   
-  let menuOption: string = userOperation.toLowerCase()
+  const menuOption: string = userOperation.toLowerCase()
 
   // create if statements
 
@@ -100,19 +100,19 @@ function addSingleGame(): void {
 // create displau team statistics funtion 
 function displayTeamStatistics(): void {
   // set stats 
-  let gamesPlayed: number = season[0];
-  let wins: number = season[1];
-  let overtimeWins: number = season[2];
-  let losses: number = season[3];
-  let overtimeLosses: number = season[4];
-  let goalsFor: number = season[5];
-  let goalsAgainst: number = season[6];
+  const gamesPlayed: number = season[0];
+  const wins: number = season[1];
+  const overtimeWins: number = season[2];
+  const losses: number = season[3];
+  const overtimeLosses: number = season[4];
+  const goalsFor: number = season[5];
+  const goalsAgainst: number = season[6];
   
   // calculate points 
-  let points: number = (wins * 2) + (overtimeWins * 2) + (overtimeLosses * 1);
+  const points: number = (wins * 2) + (overtimeWins * 2) + (overtimeLosses * 1);
 
   // calculate goal differential 
-  let goalDifferential: number = goalsFor - goalsAgainst;
+  const goalDifferential: number = goalsFor - goalsAgainst;
 
   // final outputing of all the stats
   console.log("----Team Season Statistics----");
