@@ -26,7 +26,7 @@ season[6] = 0
 // the basic menu to select the action you would like to perform
 while (finished === 1) {
   // User input 
-  const userOperation = prompt("Welcome to your 2025-26 hockey season.\nPlease select what you would like to do (select by typing the letter in front of the action)\nA. Input details of the season so far\nB. Add a new game to your season\nC. Display season statistics\nD. End season\n") || "";
+  const userOperation = prompt("Welcome to your 2025-26 hockey season.\nPlease select what you would like to do (select by typing the letter in front of the action)\nA. Input details of the season so far\nB. Add a new game to your season\nC. Display season statistics\nD. Simulate season\nE. Simulate Game\nF. End season\n") || "";
   
   const menuOption: string = userOperation.toLowerCase()
 
@@ -48,8 +48,18 @@ while (finished === 1) {
     displayTeamStatistics();
   }
 
-  // End season 
+  // Display season stats so far 
   if (menuOption === "d") {
+    simulateSeason();
+  }
+
+  // Display season stats so far 
+  if (menuOption === "e") {
+    simulateGame();
+  }
+
+  // End season 
+  if (menuOption === "f") {
     finished = 0;
   }
 }  
@@ -125,6 +135,71 @@ function displayTeamStatistics(): void {
   console.log("Goals Against: " + goalsAgainst);
   console.log("Goal Differential: " + goalDifferential)
   console.log("Points: " + points)
+}
+
+// function for simulating one game 
+function simulateGame() : void {
+  //const goalsFor = Number(prompt("How many goals did your team score in this game?"));
+  //const goalsAgainst = Number(prompt("How many goals did the other team score this game?"));
+  //const overtime = prompt("Did the game end in overtime? (Yes/No)")
+
+  const randomGoalsFor: number = Math.floor(Math.random() * 10) + 1; 
+  // for debugging
+  // console.log(randomGoalsFor)
+  const randomGoalsAgainst: number = Math.floor(Math.random() * 10) + 1; 
+  // for debugging
+  // console.log(randomGoalsAgainst)
+  const randomOvertime: number = Math.floor(Math.random() * 2) + 1; 
+  // for debugging
+  // console.log(randomOvertime)
+
+  // determine result of the game 
+  if (randomGoalsFor > randomGoalsAgainst) {
+
+    // win 
+    if (randomOvertime === 1) {
+      season[2] = season[2] + 1;
+    } else {
+      season[1] = season[1] + 1;
+    }
+  } else if (randomGoalsAgainst > randomGoalsFor) {
+
+    // loss
+    if (randomOvertime === 1) {
+      season[4] = season[4] + 1;
+    } else {
+      season[3] = season[3] + 1;
+    }
+  }
+  // update season array with the result 
+  season[0] = season[0] + 1;
+  season[5] = season[5] + randomGoalsFor
+  season[6] = season[6] + randomGoalsAgainst
+}
+
+// function for simulating whole season 
+function simulateSeason() : void {
+// clear any games inputted 
+  // index 0 games played
+  season[0] = 0
+  // index 1 wins
+  season[1] = 0
+  // index 2 overtime wins 
+  season[2] = 0
+  //index 3 losses 
+  season[3] = 0
+  //index 4 overtime losses 
+  season[4] = 0
+  //index 5 goals for 
+  season[5] = 0
+  //index 6 goals against
+  season[6] = 0
+
+  //simulate a 32 game season 
+  for (let counter: number = 1; counter <= 32; counter++) {
+    simulateGame()
+  }
+
 }
 
 console.log("\nDone.");
